@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% block extra_head %}
+    {% load recaptcha2 %}
+    {% recaptcha_init %}
+{% endblock extra_head %}
+{% block page_content %}
+    <div id="form-wrapper" class="container text-left">
+        <div class="row">
+            <h1 class="my-4">
+                Grocery List Creator
+            </h1>
+        </div>
+        <div class="row">
+            <div class="col">
+                <label for="item_entry">
+                    Grocery list item <span class="text-danger">*</span>
+                </label>
+                <input id="item_entry" type="text" class="form-control" required="true">
+            </div>
+            <div class="col">
+                <label for="department_selection">
+                    Which department is it in?
+                </label>
+                <br>
+                <select id="department_selection" class="form-control"></select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col p-4 d-block text-center">
+                <button type="submit" id="save_new_btn" class="btn btn-primary mx-auto">
+                    Save to List
+                </button>
+                <button type="reset" id="reset_list_btn" class="btn btn-warning mx-3">
+                    Reset List
+                </button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col p-4 text-center">
+                <label for="new_department">
+                    New department name:
+                </label>
+                <input id="new_department" type="text" name="new_department">
+                <button id="add_department_btn" class="btn btn-info mx-auto">
+                    Add to Departments
+                </button>
+            </div>
+        </div>
+    </div>
+    <div id="grocery_list" class="container text-left card bg-primary pt-0 px-0 pb-3">
+        <h2 class="card-header">
+            Grocery List
+        </h2>
+        <div id="display_list" class="p-3 card-body"></div>
+    </div>
+{% endblock %}

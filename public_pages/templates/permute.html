@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% block extra_head %}
+    {% load recaptcha2 %}
+    {% recaptcha_init %}
+{% endblock extra_head %}
+{% block page_content %}
+    <div class="container-fluid my-3">
+        <h1 class="cover-heading">
+            Permute Exercise
+        </h1>
+        <p class="lead">
+            Enter an alphanumeric value from 1 - 6 characters in length to see all permutations of it.
+        </p>
+        {% if messages %}
+        <div>
+            <ul class="list-unstyled">
+                {% for message in messages %}
+                <li class="alert {% if "Success" in message %} alert-success{% else %} alert-warning{% endif %}">
+                    <strong>{{ message }}</strong>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+        {% if form %}
+        <form class="form" role="form" method="post" action="{% url 'permute-form' %}">
+            {% csrf_token %}
+            <div class="form-group{% if form.permute_value.errors %} invalid{% endif %}">
+                <span class="error">{{ form.permute_value.errors }}</span>
+                <label for="{{ form.permute_value.auto_id }}" class="lead">
+                    {{ form.permute_value.label }} *
+                </label>
+                <div>
+                    {{ form.permute_value }}
+                </div>
+            </div>
+            <div>
+                <button type="submit" class="btn btn-lg btn-secondary">
+                    Show Me The Permutations!
+                </button>
+            </div>
+        </form>
+        {% endif %}
+    </div>
+    {% if value_mutated and all_permutations %}
+    <div id="permutations">
+        <h2>
+            For: {{ value_mutated }}
+        </h2>
+        <h2>
+            Here are all the permutations:
+        </h2>
+        <div class="well well-lg">
+            <ul class="list-unstyled">
+                {% for combination in all_permutations %}
+                    <li>
+                        {{ combination }}
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    {% endif %}
+{% endblock %}

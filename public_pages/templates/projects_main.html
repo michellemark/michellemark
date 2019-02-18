@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% block extra_head %}
+    {% load recaptcha2 %}
+    {% recaptcha_init %}
+{% endblock extra_head %}
+{% block page_content %}
+    <div class="row">
+        <h1 class="cover-heading">
+            Projects
+        </h1>
+        <p class="lead">
+            Far from fully inclusive, here are a few little projects I am putting up mostly for sharing with my mentees.
+        </p>
+    </div>
+    <div class="row text-left">
+        <div class="col-12">
+            <div class="card bg-primary text-light">
+                <div class="card-header">
+                    <a href="{% url 'permute-form' %}" class="text-white font-weight-bold">
+                        Permute
+                    </a>
+                </div>
+                <div class="card-body">
+                    Take an alphanumeric value from 1 - 6 characters in length and create all permutations of it.
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row text-left">
+        <div class="col-12">
+            <div class="card text-light bg-secondary">
+                <div class="card-header">
+                    <a href="{% url 'simple_grocery_list' %}" class="text-white font-weight-bold">
+                        Simple Grocery List
+                    </a>
+                </div>
+                <div class="card-body">
+                    Add items and their departments to a simple javascript only grocery list that can be printed.
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
