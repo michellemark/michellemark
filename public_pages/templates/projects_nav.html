@@ -1,0 +1,29 @@
+<div class="container">
+    <div class="row mb-3">
+        <ul id="projects-menu" class="nav nav-pills bg-primary">
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Projects Menu:
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    {% url 'projects_main' as projects_main %}
+                    <a class="dropdown-item{% if request.get_full_path == projects_main %} active{% endif %}"
+                       href="{{ projects_main }}">
+                        Projects Home
+                    </a>
+                    {% url 'permute-form' as permute_form %}
+                    <a class="dropdown-item{% if request.get_full_path == permute_form %} active{% endif %}"
+                       href="{{ permute_form }}">
+                        Permute
+                    </a>
+                    {% url 'simple_grocery_list' as simple_grocery_list %}
+                    <a class="dropdown-item{% if request.get_full_path == simple_grocery_list %} active{% endif %}"
+                       href="{{ simple_grocery_list }}">
+                        Simple Grocery List
+                    </a>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>

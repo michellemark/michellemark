@@ -13,6 +13,9 @@ body {
     justify-content: center;
     color: #F3F4F0;
 }
+#projects-menu a {
+    color: white !important;
+}
 .cover-container {
     width: 90%;
 }
@@ -34,14 +37,14 @@ body {
 .masthead-brand {
     margin-bottom: 0;
 }
-
-.cover {
-    padding: 0 1.5rem;
+.card,
+a > .card,
+.card-header,
+.card-body {
+    color: black !important;
 }
-
-.cover .btn-lg {
-    padding: .75rem 1.25rem;
-    font-weight: 700;
+.card-header {
+    font-weight: bold !important;
 }
 
 

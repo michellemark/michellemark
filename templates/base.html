@@ -36,7 +36,7 @@
 </head>
 <body class="text-center">
 <div class="cover-container d-flex h-100 p-3 mx-auto flex-column">
-    <header id="site-masthead" class="masthead mb-auto">
+    <header id="site-masthead" class="masthead mb-5">
         <div class="inner">
             <h3 class="masthead-brand">
                 Web Developer
@@ -66,7 +66,7 @@
     <main role="main" class="inner cover">
         {% block page_content %}{% endblock %}
     </main>
-    <footer id="site-footer" class="mastfoot mt-auto">
+    <footer id="site-footer" class="mastfoot mt-5">
         <div class="col-12 mb-5">
             <a href="{% url 'contact-form' %}">Contact me</a> for more information.
         </div>
@@ -98,7 +98,7 @@
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         crossorigin="anonymous"></script>
-<script src="{% static 'js/bootstrap.bundle.min.css' %}"></script>
+<script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
 {% if extra_javascript %}
     {% for js in extra_javascript %}
         <script type="text/javascript" src="{% static js %}"></script>
