@@ -1,4 +1,6 @@
-var list_processor = (function () {
+
+
+var list_processor = ( function() {
     var grocery_list = [];
     var departments = [
         "Bakery", "Baking", "Beauty", "Breakfast", "Canned Goods", "Condiments",
@@ -14,7 +16,7 @@ var list_processor = (function () {
     var new_department = $("#new_department");
     var add_department_btn = $("#add_department_btn");
 
-    function clean_user_input(value) {
+    function clean_user_input (value) {
         value = value.replace(/[^a-zA-Z0-9\s\/\-_]/, "");
 
         return value.replace(/\w\S*/g, function (word) {
@@ -22,7 +24,7 @@ var list_processor = (function () {
         });
     }
 
-    function load_department_selections() {
+    function load_department_selections () {
         department_selection.empty();
         departments.sort();
 
@@ -33,7 +35,8 @@ var list_processor = (function () {
 
             if (i === 0) {
                 option = new Option(item, item, true, true);
-            } else {
+            }
+            else {
                 option = new Option(item, item);
             }
             department_selection.append(option);
@@ -54,7 +57,8 @@ var list_processor = (function () {
 
                 if (next_item.department) {
                     current_department = next_item.department;
-                } else {
+                }
+                else {
                     current_department = "No Department Specified";
                 }
 
@@ -66,22 +70,31 @@ var list_processor = (function () {
 
     }
 
+    function validate_input(text_input) {
+        var is_valid = false;
+
+        if (text_input.val().length >= 1) {
+            is_valid = true;
+            text_input.removeClass("is-invalid");
+            text_input.addClass("is-valid");
+        }
+        else {
+            text_input.removeClass("is-valid");
+            text_input.addClass("is-invalid");
+        }
+
+        return is_valid;
+    }
+
     return {
         setup_page: function () {
             item_entry.on("keyup", function () {
-
-                if (item_entry.val().length > 1) {
-                    item_entry.removeClass("is-invalid");
-                    item_entry.addClass("is-valid");
-                } else {
-                    item_entry.removeClass("is-valid");
-                    item_entry.addClass("is-invalid");
-                }
-
+                validate_input($(this));
             });
             save_new_btn.on("click", function () {
+                var is_valid = validate_input(item_entry);
 
-                if (item_entry.val().length > 1) {
+                if (is_valid) {
                     var new_item = item_entry.val();
                     new_item = clean_user_input(new_item);
                     var dept = department_selection.val();
@@ -91,9 +104,6 @@ var list_processor = (function () {
                         "department": dept
                     });
                     print_grocery_list();
-                } else {
-                    item_entry.removeClass("is-valid");
-                    item_entry.addClass("is-invalid");
                 }
 
             });
@@ -101,27 +111,17 @@ var list_processor = (function () {
                 display_list.empty();
                 display_list.append("Nothing in the list, add some items!");
             });
-            new_department.on("keyup", function () {
-
-                if (new_department.val().length > 1) {
-                    new_department.removeClass("is-invalid");
-                    new_department.addClass("is-valid");
-                } else {
-                    new_department.removeClass("is-valid");
-                    new_department.addClass("is-invalid");
-                }
-
+            new_department.on("keyup", function() {
+                validate_input($(this));
             });
             add_department_btn.on("click", function () {
+                var is_valid = validate_input(new_department);
 
-                if (new_department.val().length > 0) {
+                if (is_valid) {
                     var new_item = new_department.val();
                     new_item = clean_user_input(new_item);
                     departments.push(new_item);
                     load_department_selections();
-                } else {
-                    new_department.removeClass("is-valid");
-                    new_department.addClass("is-invalid");
                 }
 
             });
@@ -132,6 +132,6 @@ var list_processor = (function () {
 }(list_processor || {}));
 
 
-$.when($.ready).then(function () {
+$.when($.ready).then( function() {
     list_processor.setup_page();
 });
