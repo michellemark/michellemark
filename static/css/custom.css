@@ -1,7 +1,6 @@
 html,
 body {
     height: 100%;
-    background-color: #343a40;
     font-family: 'Lato', serif;
 }
 body {
@@ -11,7 +10,6 @@ body {
     -ms-flex-pack: center;
     -webkit-box-pack: center;
     justify-content: center;
-    color: #F3F4F0;
 }
 #projects-menu a {
     color: white !important;
@@ -36,12 +34,6 @@ body {
 }
 .masthead-brand {
     margin-bottom: 0;
-}
-.card,
-a > .card,
-.card-header,
-.card-body {
-    color: black !important;
 }
 .card-header {
     font-weight: bold !important;
