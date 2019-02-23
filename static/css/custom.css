@@ -35,10 +35,6 @@ body {
 .masthead-brand {
     margin-bottom: 0;
 }
-.card-header {
-    font-weight: bold !important;
-}
-
 
 @media (min-width: 48em) {
     .masthead-brand {
