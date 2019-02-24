@@ -7,14 +7,11 @@ import re
 
 from django.core.exceptions import ValidationError
 from django.forms import ModelForm, TextInput, Textarea, Form, CharField
-from snowpenguin.django.recaptcha2.fields import ReCaptchaField
-from snowpenguin.django.recaptcha2.widgets import ReCaptchaWidget
 
 from .models import ContactMe
 
 
 class ContactMeForm(ModelForm):
-    captcha = ReCaptchaField(widget=ReCaptchaWidget(), required=True)
 
     class Meta:
         model = ContactMe

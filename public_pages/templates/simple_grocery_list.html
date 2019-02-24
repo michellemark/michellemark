@@ -1,13 +1,6 @@
 {% extends 'base.html' %}
-{% block extra_head %}
-    {% load recaptcha2 %}
-    {% recaptcha_init %}
-{% endblock extra_head %}
 {% block page_content %}
     <div id="form-wrapper" class="container text-left">
-        <div class="row">
-            {% include 'projects_nav.html' %}
-        </div>
         <div class="row">
             <h1 class="my-4">
                 Grocery List Creator
@@ -50,8 +43,8 @@
             </div>
         </div>
     </div>
-    <div id="grocery_list" class="container text-left card bg-primary pt-0 px-0 pb-3">
-        <h2 class="card-header">
+    <div id="grocery_list" class="container text-left card pt-0 px-0 pb-3 border-primary">
+        <h2 class="card-header text-primary border-primary">
             Grocery List
         </h2>
         <div id="display_list" class="p-3 card-body"></div>

@@ -30,7 +30,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.sites',
     'django.contrib.sitemaps',
-    'snowpenguin.django.recaptcha2',
     'public_pages.apps.PublicPagesConfig',
 ]
 MIDDLEWARE = [

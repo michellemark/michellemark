@@ -1,8 +1,4 @@
 {% extends 'base.html' %}
-{% block extra_head %}
-    {% load recaptcha2 %}
-    {% recaptcha_init %}
-{% endblock extra_head %}
 {% block page_content %}
     <div class="row">
         <h1 class="cover-heading">
@@ -10,9 +6,6 @@
         </h1>
         <p class="lead">
             Far from fully inclusive, here are a few little projects I am putting up, mostly for sharing with my mentees.
-        </p>
-        <p>
-            {% include 'projects_nav.html' %}
         </p>
     </div>
     <h2>

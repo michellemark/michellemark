@@ -1,0 +1,47 @@
+{% load utility_tags %}
+<ul class="nav nav-masthead justify-content-center">
+    <li class="nav-item">
+        {% url 'home' as home %}
+        <a class="btn btn-outline-secondary {% if request.get_full_path == home %} active{% endif %}"
+           href="{{ home }}">
+            Home
+        </a>
+    </li>
+    {% url 'projects_main' as projects_main %}
+    {% url 'permute-form' as permute_form %}
+    {% url 'simple_grocery_list' as simple_grocery_list %}
+    {% make_list projects_main permute_form simple_grocery_list as project_pages %}
+    <li class="nav-item dropdown btn  {% if request.get_full_path in project_pages %} btn-secondary {% else %} btn-outline-secondary{% endif %}">
+        <a class="nav-link dropdown-toggle p-0 {% if request.get_full_path in project_pages %} text-white {% else %} text-secondary{% endif %}"
+           href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
+           aria-haspopup="true" aria-expanded="false">
+            Projects
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <a class="dropdown-item{% if request.get_full_path == projects_main %} active{% endif %}"
+               href="{{ projects_main }}">
+                Projects Home
+            </a>
+            <a class="dropdown-item{% if request.get_full_path == permute_form %} active{% endif %}"
+               href="{{ permute_form }}">
+                Permute
+            </a>
+            <a class="dropdown-item{% if request.get_full_path == simple_grocery_list %} active{% endif %}"
+               href="{{ simple_grocery_list }}">
+                Simple Grocery List
+            </a>
+        </div>
+    </li>
+    <li>
+        {% url 'contact-form' as contactform %}
+        <a class="btn btn-outline-secondary {% if request.get_full_path == contactform %} active{% endif %}"
+           href="{{ contactform }}">
+            Contact
+        </a>
+    </li>
+    <li>
+        <a class="btn btn-outline-secondary" href="https://github.com/michellemark">
+            GitHub
+        </a>
+    </li>
+</ul>

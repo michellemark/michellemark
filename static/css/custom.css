@@ -11,9 +11,6 @@ body {
     -webkit-box-pack: center;
     justify-content: center;
 }
-#projects-menu a {
-    color: white !important;
-}
 .cover-container {
     width: 90%;
 }

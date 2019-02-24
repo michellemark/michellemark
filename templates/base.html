@@ -41,26 +41,7 @@
             <h3 class="masthead-brand">
                 Web Developer
             </h3>
-            <nav class="nav nav-masthead justify-content-center">
-                {% url 'home' as home %}
-                <a class="btn btn-outline-secondary {% if request.get_full_path == home %} active{% endif %}"
-                   href="{{ home }}">
-                    Home
-                </a>
-                {% url 'projects_main' as projects_main %}
-                <a class="btn btn-outline-secondary {% if request.get_full_path == projects_main %} active{% endif %}"
-                   href="{{ projects_main }}">
-                    Projects
-                </a>
-                {% url 'contact-form' as contactform %}
-                <a class="btn btn-outline-secondary {% if request.get_full_path == contactform %} active{% endif %}"
-                   href="{{ contactform }}">
-                    Contact
-                </a>
-                <a class="btn btn-outline-secondary" href="https://github.com/michellemark">
-                    GitHub
-                </a>
-            </nav>
+            {% include "site-menu.html" %}
         </div>
     </header>
     <main role="main" class="inner cover">
@@ -104,5 +85,6 @@
         <script type="text/javascript" src="{% static js %}"></script>
     {% endfor %}
 {% endif %}
+{% block extra_external_js %}{% endblock %}
 </body>
 </html>

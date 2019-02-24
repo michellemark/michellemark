@@ -4,11 +4,14 @@
 
 Views for the main pages of the site
 """
+import json
+import requests
 from itertools import permutations
 
 from django.shortcuts import redirect, render
 from django.views.generic import TemplateView
 
+from michellemark.settings.base import RECAPTCHA_PUBLIC_KEY, RECAPTCHA_PRIVATE_KEY
 from .forms import ContactMeForm, PermuteForm
 
 
@@ -22,6 +25,7 @@ class ContactMeView(TemplateView):
         context['page_title'] = "Contact Me"
         context['extra_css'] = []
         context['extra_javascript'] = []
+        context['recaptcha_key'] = RECAPTCHA_PUBLIC_KEY
 
         return context
 
@@ -36,9 +40,28 @@ class ContactMeView(TemplateView):
         context['form'] = self.form_class(request.POST)
 
         if context['form'].is_valid():
-            context['form'].save()
+            recaptcha_response = request.POST.get('g-recaptcha-response')
 
-            return redirect(self.success_url)
+            if recaptcha_response:
+                url = 'https://www.google.com/recaptcha/api/siteverify'
+                recaptcha_values = {
+                    'secret': RECAPTCHA_PRIVATE_KEY,
+                    'response': recaptcha_response
+                }
+                result = requests.post(url, data=recaptcha_values)
+
+                if result.ok:
+                    response = result.json()
+
+                    if response.get("success"):
+                        context['form'].save()
+
+                        return redirect(self.success_url)
+
+                    else:
+                        context["captcha_error"] = f"Error processing captcha: {response.get('error-codes')}"
+            else:
+                context["captcha_error"] = "Please check the box to tell me you are not a robot."
 
         return render(request, self.template_name, context)
 
