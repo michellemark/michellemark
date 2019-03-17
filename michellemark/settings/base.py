@@ -1,15 +1,19 @@
 import os
-from os import path
 
+import boto3
+
+ssm = boto3.client('ssm')
 SETTINGS_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BASE_DIR = os.path.join(SETTINGS_DIR, '..')
-SECRET_KEY = os.environ.get('SECRET_KEY')
+ssm_secret_key = ssm.get_parameter(Name='/Prod/Secret_Key', WithDecryption=True)
+SECRET_KEY = ssm_secret_key["Parameter"]["Value"]
 DEBUG = False
 SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SECURE = True
 ALLOWED_HOSTS = ['.michellemark.me']
-DEFAULT_FROM_EMAIL = "web-developer@michellemark.me"
-SERVER_EMAIL = "web-developer@michellemark.me"
+ssm_my_email = ssm.get_parameter(Name="/Michelle/Email", WithDecryption=True)
+DEFAULT_FROM_EMAIL = ssm_my_email["Parameter"]["Value"]
+SERVER_EMAIL = DEFAULT_FROM_EMAIL
 ADMINS = [('Michelle Mark', DEFAULT_FROM_EMAIL)]
 EMAIL_HOST = os.environ.get("EMAIL_HOST", "127.0.0.1")
 EMAIL_PORT = os.environ.get("EMAIL_PORT", 25)
